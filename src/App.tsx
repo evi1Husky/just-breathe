@@ -2,7 +2,7 @@ import { Box } from "@mui/material";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import { Circle } from "./components/Circle";
-import { Menu } from "./components/Menu";
+import { BreathingMenu } from "./components/BreathingMenu";
 
 export const App = () => {
   return (
@@ -21,8 +21,8 @@ export const App = () => {
         justifyContent="center"
         alignItems="center"
       >
-        <Box sx={{ position: 'absolute', right: 50}}>
-          <Menu></Menu>
+        <Box sx={{ position: "absolute", right: 50 }}>
+          <BreathingMenu></BreathingMenu>
         </Box>
         <Typography
           variant="h1"

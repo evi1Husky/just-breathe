@@ -10,11 +10,19 @@ import { createTheme, ThemeProvider, responsiveFontSizes } from "@mui/material";
 
 let theme = createTheme({
   palette: {
+    mode: "dark",
     primary: {
       main: "#90caf9",
     },
   },
   components: {
+    MuiMenu: {
+      styleOverrides: {
+        paper: {
+          backgroundColor: "rgb(0, 7, 27)",
+        },
+      },
+    },
     MuiCssBaseline: {
       styleOverrides: {
         body: {
