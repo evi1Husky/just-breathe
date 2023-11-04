@@ -3,8 +3,15 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import { Circle } from "./components/Circle";
 import { BreathingMenu } from "./components/BreathingMenu";
+import { useState } from "react";
 
 export const App = () => {
+  const [isBreathing, setIsBreathing] = useState(false);
+
+  const handleBreatheButtonClick = () => {
+    !isBreathing ? setIsBreathing(true) : setIsBreathing(false);
+  };
+
   return (
     <Box
       display="flex"
@@ -47,10 +54,15 @@ export const App = () => {
         alignItems="center"
         minHeight="25rem"
       >
-        <Circle />
+        <Circle isBreathing={isBreathing} />
       </Box>
-      <Button variant="contained" color="primary">
-        button
+      <Button
+        sx={{ minWidth: "6rem" }}
+        variant="contained"
+        color="primary"
+        onClick={handleBreatheButtonClick}
+      >
+        {!isBreathing ? "brethe" : "stop"}
       </Button>
     </Box>
   );

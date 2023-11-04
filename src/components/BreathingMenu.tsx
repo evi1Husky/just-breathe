@@ -40,7 +40,11 @@ export const BreathingMenu = () => {
         open={open}
         onClose={handleClose}
       >
-        <MenuItem sx={{ justifyContent: "center" }} onClick={handleClose}>
+        <MenuItem
+          color="primary"
+          sx={{ justifyContent: "center" }}
+          onClick={handleClose}
+        >
           item 1
         </MenuItem>
         <MenuItem sx={{ justifyContent: "center" }} onClick={handleClose}>
@@ -59,6 +63,7 @@ export const BreathingMenu = () => {
             <Typography>slider label</Typography>
             <Slider
               sx={{ width: 150 }}
+              size="small"
               aria-label="Small steps"
               defaultValue={4}
               step={1}
@@ -70,6 +75,7 @@ export const BreathingMenu = () => {
             <Typography>slider label</Typography>
             <Slider
               sx={{ width: 150 }}
+              size="small"
               aria-label="Small steps"
               defaultValue={4}
               step={1}
@@ -81,6 +87,7 @@ export const BreathingMenu = () => {
             <Typography>slider label</Typography>
             <Slider
               sx={{ width: 150 }}
+              size="small"
               aria-label="Small steps"
               defaultValue={4}
               step={1}
@@ -92,6 +99,7 @@ export const BreathingMenu = () => {
             <Typography>slider label</Typography>
             <Slider
               sx={{ width: 150 }}
+              size="small"
               aria-label="Small steps"
               defaultValue={4}
               step={1}
