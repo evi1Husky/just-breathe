@@ -32,7 +32,7 @@ let theme = createTheme({
   },
   typography: {
     h1: {
-      fontSize: 38,
+      fontSize: 30,
       fontWeight: 500,
     },
     fontFamily: ["Roboto"].join(","),

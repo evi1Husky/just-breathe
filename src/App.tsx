@@ -55,7 +55,7 @@ export const App = () => {
             WebkitTextFillColor: "transparent",
           }}
         >
-          SOME TEXT
+          JUST BREATHE
         </Typography>
       </Box>
       <Box
@@ -76,7 +76,7 @@ export const App = () => {
         color="primary"
         onClick={handleBreatheButtonClick}
       >
-        {!isBreathing ? "brethe" : "stop"}
+        {!isBreathing ? "breathe" : "stop"}
       </Button>
     </Box>
   );

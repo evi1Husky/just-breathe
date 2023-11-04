@@ -7,6 +7,31 @@ export const Circle = ({ isBreathing, breathingTechnique }: CircleProps) => {
   const maxSize = "350px";
   const minSize = "130px";
 
+  const circleref = useRef<any>(null);
+  const idleCircleref = useRef<any>(null);
+
+  const getCurrentCircleSize = (circleDiv: any): string => {
+    if (circleDiv) {
+      const style = getComputedStyle(circleDiv);
+      return style.width;
+    } else {
+      return minSize;
+    }
+  };
+
+  const getCurrentCircleColor = (circleDiv: any): string => {
+    if (circleDiv) {
+      const style = getComputedStyle(circleDiv);
+      return style.backgroundColor;
+    } else {
+      return "rgba(187, 230, 255)";
+    }
+  };
+
+  const currentCircleColor = getCurrentCircleColor(circleref.current);
+  const currentCurcleSize = getCurrentCircleSize(circleref.current);
+  const idleCircleSize = getCurrentCircleSize(idleCircleref.current);
+
   const variants = {
     breatheIn: {
       width: maxSize,
@@ -47,12 +72,20 @@ export const Circle = ({ isBreathing, breathingTechnique }: CircleProps) => {
         repeat: Infinity,
       },
     },
+    reset: {
+      width: [idleCircleSize, minSize],
+      height: [idleCircleSize, minSize],
+      transition: {
+        duration: 0.5,
+      },
+    },
   };
 
   const controls = useAnimationControls();
 
   const sequence = async () => {
     controls.start("glow");
+    await controls.start("reset");
     for (let i = 0; i < 20; i++) {
       await controls.start("breatheIn");
       await controls.start("hold");
@@ -63,36 +96,11 @@ export const Circle = ({ isBreathing, breathingTechnique }: CircleProps) => {
 
   useEffect(() => {
     if (isBreathing) {
-      setTimeout(() => {
-        sequence();
-      }, 200);
+      sequence();
     } else {
       return;
     }
   }, [isBreathing]);
- 
-  const circleref = useRef<any>(null);
-
-  const getCurrentCircleSize = (circleDiv: any): string => {
-    if (circleDiv) {
-      const style = getComputedStyle(circleref.current);
-      return style.width;
-    } else {
-      return minSize;
-    }
-  };
-
-  const getCurrentCircleColor = (circleDiv: any): string => {
-    if (circleDiv) {
-      const style = getComputedStyle(circleref.current);
-      return style.backgroundColor;
-    } else {
-      return "rgba(187, 230, 255)";
-    }
-  };
-  
-  const currentCircleColor = getCurrentCircleColor(circleref.current);
-  const currentCurcleSize = getCurrentCircleSize(circleref.current);
 
   return isBreathing ? (
     <motion.div
@@ -108,12 +116,13 @@ export const Circle = ({ isBreathing, breathingTechnique }: CircleProps) => {
     />
   ) : (
     <motion.main
+      ref={idleCircleref}
       animate={{
         width: [currentCurcleSize, minSize],
         height: [currentCurcleSize, minSize],
         backgroundColor: [currentCircleColor, "rgba(187, 230, 255)"],
       }}
-      transition={{ duration: 1 }}
+      transition={{ duration: 0.5 }}
       style={{
         backgroundColor: "rgba(187, 230, 255)",
         width: currentCurcleSize,
