@@ -82,7 +82,16 @@ export const Circle = ({ isBreathing }: CircleProps) => {
     }
   };
 
-  const currentCurcleSize = getCurrentCircleSize(circleref.current)
+  const getCurrentCircleColor = (circleDiv: any): string => {
+    if (circleDiv) {
+      const style = getComputedStyle(circleref.current);
+      return style.backgroundColor;
+    } else {
+      return "rgba(187, 230, 255)";
+    }
+  };
+  const currentCircleColor = getCurrentCircleColor(circleref.current);
+  const currentCurcleSize = getCurrentCircleSize(circleref.current);
 
   return isBreathing ? (
     <motion.div
@@ -102,6 +111,7 @@ export const Circle = ({ isBreathing }: CircleProps) => {
       animate={{
         width: [currentCurcleSize, minSize],
         height: [currentCurcleSize, minSize],
+        backgroundColor: [currentCircleColor, "rgba(187, 230, 255)"],
       }}
       transition={{ duration: 1 }}
       style={{
