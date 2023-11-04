@@ -6,8 +6,12 @@ import MenuItem from "@mui/material/MenuItem";
 import Box from "@mui/material/Box";
 import Slider from "@mui/material/Slider";
 import Typography from "@mui/material/Typography";
+import { BreathingMenuProps } from "../types";
 
-export const BreathingMenu = () => {
+export const BreathingMenu = ({
+  breathingTechnique,
+  setBreathingTechnique,
+}: BreathingMenuProps) => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {

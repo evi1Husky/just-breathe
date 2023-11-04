@@ -1,5 +1,19 @@
-interface CircleProps {
-  isBreathing: boolean;
+interface BreathingTechnique {
+  breatheIn: number;
+  hold: number;
+  breatheOut: number;
+  hold2: number;
 }
 
-export { CircleProps };
+interface CircleProps {
+  isBreathing: boolean;
+  breathingTechnique: BreathingTechnique;
+}
+
+interface BreathingMenuProps {
+  breathingTechnique: BreathingTechnique;
+  setBreathingTechnique: React.Dispatch<
+    React.SetStateAction<BreathingTechnique>
+  >;
+}
+export { CircleProps, BreathingTechnique, BreathingMenuProps };

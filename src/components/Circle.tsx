@@ -3,7 +3,7 @@ import { useAnimationControls } from "framer-motion";
 import { useEffect, useRef } from "react";
 import { CircleProps } from "../types";
 
-export const Circle = ({ isBreathing }: CircleProps) => {
+export const Circle = ({ isBreathing, breathingTechnique }: CircleProps) => {
   const maxSize = "350px";
   const minSize = "130px";
 
@@ -12,28 +12,28 @@ export const Circle = ({ isBreathing }: CircleProps) => {
       width: maxSize,
       height: maxSize,
       transition: {
-        duration: 0.5,
+        duration: breathingTechnique.breatheIn,
       },
     },
     hold: {
       width: maxSize,
       height: maxSize,
       transition: {
-        duration: 0.5,
+        duration: breathingTechnique.hold,
       },
     },
     breatheOut: {
       width: minSize,
       height: minSize,
       transition: {
-        duration: 0.5,
+        duration: breathingTechnique.breatheOut,
       },
     },
     hold2: {
       width: minSize,
       height: minSize,
       transition: {
-        duration: 0.5,
+        duration: breathingTechnique.hold2,
       },
     },
     glow: {
@@ -61,8 +61,6 @@ export const Circle = ({ isBreathing }: CircleProps) => {
     }
   };
 
-  const circleref = useRef<any>(null);
-
   useEffect(() => {
     if (isBreathing) {
       setTimeout(() => {
@@ -72,6 +70,8 @@ export const Circle = ({ isBreathing }: CircleProps) => {
       return;
     }
   }, [isBreathing]);
+ 
+  const circleref = useRef<any>(null);
 
   const getCurrentCircleSize = (circleDiv: any): string => {
     if (circleDiv) {
@@ -90,12 +90,12 @@ export const Circle = ({ isBreathing }: CircleProps) => {
       return "rgba(187, 230, 255)";
     }
   };
+  
   const currentCircleColor = getCurrentCircleColor(circleref.current);
   const currentCurcleSize = getCurrentCircleSize(circleref.current);
 
   return isBreathing ? (
     <motion.div
-      id="animated"
       ref={circleref}
       variants={variants}
       animate={controls}

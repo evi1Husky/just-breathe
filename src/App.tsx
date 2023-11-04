@@ -4,9 +4,17 @@ import Button from "@mui/material/Button";
 import { Circle } from "./components/Circle";
 import { BreathingMenu } from "./components/BreathingMenu";
 import { useState } from "react";
+import { BreathingTechnique } from "./types";
 
 export const App = () => {
   const [isBreathing, setIsBreathing] = useState(false);
+  const [breathingTechnique, setBreathingTechnique] =
+    useState<BreathingTechnique>({
+      breatheIn: 4,
+      hold: 7,
+      breatheOut: 8,
+      hold2: 0,
+    });
 
   const handleBreatheButtonClick = () => {
     !isBreathing ? setIsBreathing(true) : setIsBreathing(false);
@@ -29,7 +37,10 @@ export const App = () => {
         alignItems="center"
       >
         <Box sx={{ position: "absolute", right: 50 }}>
-          <BreathingMenu></BreathingMenu>
+          <BreathingMenu
+            breathingTechnique={breathingTechnique}
+            setBreathingTechnique={setBreathingTechnique}
+          ></BreathingMenu>
         </Box>
         <Typography
           variant="h1"
@@ -54,7 +65,10 @@ export const App = () => {
         alignItems="center"
         minHeight="25rem"
       >
-        <Circle isBreathing={isBreathing} />
+        <Circle
+          isBreathing={isBreathing}
+          breathingTechnique={breathingTechnique}
+        />
       </Box>
       <Button
         sx={{ minWidth: "6rem" }}
