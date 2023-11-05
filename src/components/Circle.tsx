@@ -6,11 +6,13 @@ import { CircleProps } from "../types";
 export const Circle = ({ isBreathing, breathingTechnique }: CircleProps) => {
   const maxSize = "350px";
   const minSize = "130px";
+  const color = "rgb(187, 230, 255)";
+  const minBrightness = "rgb(160, 195, 216)";
 
-  const circleref = useRef<any>(null);
-  const idleCircleref = useRef<any>(null);
+  const circleref = useRef<HTMLDivElement>(null);
+  const idleCircleref = useRef<HTMLDivElement>(null);
 
-  const getCurrentCircleSize = (circleDiv: any): string => {
+  const getCurrentCircleSize = (circleDiv: HTMLDivElement | null): string => {
     if (circleDiv) {
       const style = getComputedStyle(circleDiv);
       return style.width;
@@ -19,12 +21,12 @@ export const Circle = ({ isBreathing, breathingTechnique }: CircleProps) => {
     }
   };
 
-  const getCurrentCircleColor = (circleDiv: any): string => {
+  const getCurrentCircleColor = (circleDiv: HTMLDivElement | null): string => {
     if (circleDiv) {
       const style = getComputedStyle(circleDiv);
       return style.backgroundColor;
     } else {
-      return "rgba(187, 230, 255)";
+      return color;
     }
   };
 
@@ -62,21 +64,10 @@ export const Circle = ({ isBreathing, breathingTechnique }: CircleProps) => {
       },
     },
     glow: {
-      backgroundColor: [
-        "rgb(187, 230, 255)",
-        "rgb(160, 195, 216)",
-        "rgb(187, 230, 255)",
-      ],
+      backgroundColor: [color, minBrightness, color],
       transition: {
         duration: 1,
         repeat: Infinity,
-      },
-    },
-    reset: {
-      width: [idleCircleSize, minSize],
-      height: [idleCircleSize, minSize],
-      transition: {
-        duration: 0.5,
       },
     },
   };
@@ -85,7 +76,6 @@ export const Circle = ({ isBreathing, breathingTechnique }: CircleProps) => {
 
   const sequence = async () => {
     controls.start("glow");
-    await controls.start("reset");
     for (let i = 0; i < 20; i++) {
       await controls.start("breatheIn");
       await controls.start("hold");
@@ -97,8 +87,6 @@ export const Circle = ({ isBreathing, breathingTechnique }: CircleProps) => {
   useEffect(() => {
     if (isBreathing) {
       sequence();
-    } else {
-      return;
     }
   }, [isBreathing]);
 
@@ -106,9 +94,13 @@ export const Circle = ({ isBreathing, breathingTechnique }: CircleProps) => {
     <motion.div
       ref={circleref}
       variants={variants}
+      initial={{
+        width: idleCircleSize,
+        height: idleCircleSize,
+      }}
       animate={controls}
       style={{
-        backgroundColor: "rgba(187, 230, 255)",
+        backgroundColor: color,
         width: minSize,
         height: minSize,
         borderRadius: "50%",
@@ -120,11 +112,11 @@ export const Circle = ({ isBreathing, breathingTechnique }: CircleProps) => {
       animate={{
         width: [currentCurcleSize, minSize],
         height: [currentCurcleSize, minSize],
-        backgroundColor: [currentCircleColor, "rgba(187, 230, 255)"],
+        backgroundColor: [currentCircleColor, color],
       }}
       transition={{ duration: 0.5 }}
       style={{
-        backgroundColor: "rgba(187, 230, 255)",
+        backgroundColor: color,
         width: currentCurcleSize,
         height: currentCurcleSize,
         borderRadius: "50%",

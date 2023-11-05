@@ -18,8 +18,29 @@ export const BreathingMenu = ({
     setAnchorEl(event.currentTarget);
   };
 
-  const handleClose = () => {
+  const handleClose = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(null);
+    const value = event.currentTarget.dataset.myValue;
+    switch (value) {
+      case "4-7-8":
+        setBreathingTechnique({
+          breatheIn: 4,
+          hold: 7,
+          breatheOut: 8,
+          hold2: 1,
+        })
+        break;
+      case "box breathing":
+        setBreathingTechnique({
+          breatheIn: 4,
+          hold: 4,
+          breatheOut: 4,
+          hold2: 4,
+        });
+        break;
+      default:
+    
+    }
   };
 
   return (
@@ -39,23 +60,27 @@ export const BreathingMenu = ({
         id="long-menu"
         MenuListProps={{
           "aria-labelledby": "long-button",
+          sx: {
+            backgroundColor: "rgb(24, 29, 44)",
+          },
         }}
         anchorEl={anchorEl}
         open={open}
         onClose={handleClose}
       >
         <MenuItem
-          color="primary"
+          data-my-value={"4-7-8"}
           sx={{ justifyContent: "center" }}
           onClick={handleClose}
         >
-          item 1
+          4-7-8
         </MenuItem>
-        <MenuItem sx={{ justifyContent: "center" }} onClick={handleClose}>
-          item 2
-        </MenuItem>
-        <MenuItem sx={{ justifyContent: "center" }} onClick={handleClose}>
-          item 3
+        <MenuItem
+          sx={{ justifyContent: "center" }}
+          data-my-value={"box breathing"}
+          onClick={handleClose}
+        >
+          box breathing
         </MenuItem>
         <Box
           display="flex"
@@ -64,7 +89,7 @@ export const BreathingMenu = ({
           width={200}
         >
           <Box sx={{ marginTop: "1rem" }}>
-            <Typography>slider label</Typography>
+            <Typography>breathe in {breathingTechnique.breatheIn}s</Typography>
             <Slider
               sx={{ width: 150 }}
               size="small"
@@ -76,7 +101,7 @@ export const BreathingMenu = ({
             />
           </Box>
           <Box>
-            <Typography>slider label</Typography>
+            <Typography>hold {breathingTechnique.hold}s</Typography>
             <Slider
               sx={{ width: 150 }}
               size="small"
@@ -88,7 +113,9 @@ export const BreathingMenu = ({
             />
           </Box>
           <Box>
-            <Typography>slider label</Typography>
+            <Typography>
+              breathe out {breathingTechnique.breatheOut}s
+            </Typography>
             <Slider
               sx={{ width: 150 }}
               size="small"
@@ -100,7 +127,7 @@ export const BreathingMenu = ({
             />
           </Box>
           <Box>
-            <Typography>slider label</Typography>
+            <Typography>hold {breathingTechnique.hold2}s</Typography>
             <Slider
               sx={{ width: 150 }}
               size="small"

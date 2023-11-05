@@ -15,13 +15,6 @@ let theme = createTheme({
     },
   },
   components: {
-    MuiMenu: {
-      styleOverrides: {
-        paper: {
-          backgroundColor: "rgb(0, 7, 27)",
-        },
-      },
-    },
     MuiCssBaseline: {
       styleOverrides: {
         body: {
