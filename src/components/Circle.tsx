@@ -3,7 +3,11 @@ import { useAnimationControls } from "framer-motion";
 import { useEffect, useRef } from "react";
 import { CircleProps } from "../types";
 
-export const Circle = ({ isBreathing, breathingTechnique }: CircleProps) => {
+export const Circle = ({
+  isBreathing,
+  setBreathing,
+  breathingTechnique,
+}: CircleProps) => {
   const maxSize = "350px";
   const minSize = "130px";
   const color = "rgb(187, 230, 255)";
@@ -76,12 +80,13 @@ export const Circle = ({ isBreathing, breathingTechnique }: CircleProps) => {
 
   const sequence = async () => {
     controls.start("glow");
-    for (let i = 0; i < 20; i++) {
+    for (let i = 0; i < breathingTechnique.breaths; i++) {
       await controls.start("breatheIn");
       await controls.start("hold");
       await controls.start("breatheOut");
       await controls.start("hold2");
     }
+    setBreathing(false)
   };
 
   useEffect(() => {

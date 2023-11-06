@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { IconButton } from "@mui/material";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import Menu from "@mui/material/Menu";
@@ -6,9 +6,11 @@ import MenuItem from "@mui/material/MenuItem";
 import Box from "@mui/material/Box";
 import Slider from "@mui/material/Slider";
 import Typography from "@mui/material/Typography";
-import { BreathingMenuProps } from "../types";
+import { BreathingMenuProps, BreathingTechnique } from "../types";
 
 export const BreathingMenu = ({
+  isBreathing,
+  setBreathing,
   breathingTechnique,
   setBreathingTechnique,
 }: BreathingMenuProps) => {
@@ -23,6 +25,7 @@ export const BreathingMenu = ({
     switch (value) {
       case "4-7-8":
         setBreathingTechnique({
+          ...breathingTechnique,
           breatheIn: 4,
           hold: 7,
           breatheOut: 8,
@@ -31,6 +34,7 @@ export const BreathingMenu = ({
         break;
       case "box breathing":
         setBreathingTechnique({
+          ...breathingTechnique,
           breatheIn: 4,
           hold: 4,
           breatheOut: 4,
@@ -125,7 +129,7 @@ export const BreathingMenu = ({
               aria-label="Small steps"
               value={breathingTechnique.hold}
               step={1}
-              min={1}
+              min={0}
               max={15}
             />
           </Box>
@@ -163,8 +167,25 @@ export const BreathingMenu = ({
               aria-label="Small steps"
               value={breathingTechnique.hold2}
               step={1}
-              min={1}
+              min={0}
               max={15}
+            />
+            <Typography>breaths {breathingTechnique.breaths}</Typography>
+            <Slider
+              onChange={(e: Event) => {
+                isBreathing ? setBreathing(false) : null;
+                setBreathingTechnique({
+                  ...breathingTechnique,
+                  breaths: Number((e.target as HTMLInputElement).value),
+                });
+              }}
+              sx={{ width: 150 }}
+              size="small"
+              aria-label="Small steps"
+              value={breathingTechnique.breaths}
+              step={1}
+              min={1}
+              max={100}
             />
           </Box>
         </Box>

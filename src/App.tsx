@@ -5,20 +5,18 @@ import { Circle } from "./components/Circle";
 import { BreathingMenu } from "./components/BreathingMenu";
 import { useState } from "react";
 import { BreathingTechnique } from "./types";
+import { setLocalStorage, getThingsFromLocalStorage } from "./utility";
 
 export const App = () => {
-  const [isBreathing, setIsBreathing] = useState(false);
+  const [isBreathing, setBreathing] = useState(false);
   const [breathingTechnique, setBreathingTechnique] =
-    useState<BreathingTechnique>({
-      breatheIn: 4,
-      hold: 7,
-      breatheOut: 8,
-      hold2: 1,
-    });
+    useState<BreathingTechnique>(getThingsFromLocalStorage());
 
   const handleBreatheButtonClick = () => {
-    !isBreathing ? setIsBreathing(true) : setIsBreathing(false);
+    !isBreathing ? setBreathing(true) : setBreathing(false);
   };
+
+  setLocalStorage(breathingTechnique);
 
   return (
     <Box
@@ -38,6 +36,8 @@ export const App = () => {
       >
         <Box sx={{ position: "absolute", right: 50 }}>
           <BreathingMenu
+            isBreathing={isBreathing}
+            setBreathing={setBreathing}
             breathingTechnique={breathingTechnique}
             setBreathingTechnique={setBreathingTechnique}
           ></BreathingMenu>
@@ -67,6 +67,7 @@ export const App = () => {
       >
         <Circle
           isBreathing={isBreathing}
+          setBreathing={setBreathing}
           breathingTechnique={breathingTechnique}
         />
       </Box>
