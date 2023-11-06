@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { IconButton } from "@mui/material";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import Menu from "@mui/material/Menu";
@@ -19,7 +19,6 @@ export const BreathingMenu = ({
   };
 
   const handleClose = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorEl(null);
     const value = event.currentTarget.dataset.myValue;
     switch (value) {
       case "4-7-8":
@@ -28,7 +27,7 @@ export const BreathingMenu = ({
           hold: 7,
           breatheOut: 8,
           hold2: 1,
-        })
+        });
         break;
       case "box breathing":
         setBreathingTechnique({
@@ -39,7 +38,13 @@ export const BreathingMenu = ({
         });
         break;
       default:
-    
+    }
+    if ((event.target as HTMLElement).role === "menuitem") {
+      setTimeout(() => {
+        setAnchorEl(null);
+      }, 300);
+    } else {
+      setAnchorEl(null);
     }
   };
 
@@ -91,10 +96,16 @@ export const BreathingMenu = ({
           <Box sx={{ marginTop: "1rem" }}>
             <Typography>breathe in {breathingTechnique.breatheIn}s</Typography>
             <Slider
+              onChange={(e: Event) => {
+                setBreathingTechnique({
+                  ...breathingTechnique,
+                  breatheIn: Number((e.target as HTMLInputElement).value),
+                });
+              }}
               sx={{ width: 150 }}
               size="small"
               aria-label="Small steps"
-              defaultValue={4}
+              value={breathingTechnique.breatheIn}
               step={1}
               min={1}
               max={15}
@@ -103,10 +114,16 @@ export const BreathingMenu = ({
           <Box>
             <Typography>hold {breathingTechnique.hold}s</Typography>
             <Slider
+              onChange={(e: Event) => {
+                setBreathingTechnique({
+                  ...breathingTechnique,
+                  hold: Number((e.target as HTMLInputElement).value),
+                });
+              }}
               sx={{ width: 150 }}
               size="small"
               aria-label="Small steps"
-              defaultValue={4}
+              value={breathingTechnique.hold}
               step={1}
               min={1}
               max={15}
@@ -117,10 +134,16 @@ export const BreathingMenu = ({
               breathe out {breathingTechnique.breatheOut}s
             </Typography>
             <Slider
+              onChange={(e: Event) => {
+                setBreathingTechnique({
+                  ...breathingTechnique,
+                  breatheOut: Number((e.target as HTMLInputElement).value),
+                });
+              }}
               sx={{ width: 150 }}
               size="small"
               aria-label="Small steps"
-              defaultValue={4}
+              value={breathingTechnique.breatheOut}
               step={1}
               min={1}
               max={15}
@@ -129,10 +152,16 @@ export const BreathingMenu = ({
           <Box>
             <Typography>hold {breathingTechnique.hold2}s</Typography>
             <Slider
+              onChange={(e: Event) => {
+                setBreathingTechnique({
+                  ...breathingTechnique,
+                  hold2: Number((e.target as HTMLInputElement).value),
+                });
+              }}
               sx={{ width: 150 }}
               size="small"
               aria-label="Small steps"
-              defaultValue={4}
+              value={breathingTechnique.hold2}
               step={1}
               min={1}
               max={15}

@@ -15,7 +15,7 @@ export const App = () => {
       breatheOut: 8,
       hold2: 1,
     });
-  console.log(breathingTechnique);
+
   const handleBreatheButtonClick = () => {
     !isBreathing ? setIsBreathing(true) : setIsBreathing(false);
   };
