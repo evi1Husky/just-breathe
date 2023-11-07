@@ -1,6 +1,6 @@
 # Just Breathe
 
-Breathing exercise web app for stress manegment featuring popular
+Breathing exercise web app for stress management featuring popular
 breathing techniques such as 4-7-8 and box breathing.
 
 ## made with
