@@ -6,6 +6,9 @@ import "@fontsource/roboto/300.css";
 import "@fontsource/roboto/400.css";
 import "@fontsource/roboto/500.css";
 import { createTheme, ThemeProvider, responsiveFontSizes } from "@mui/material";
+import { registerSW } from "virtual:pwa-register";
+
+registerSW({ immediate: true });
 
 let theme = createTheme({
   palette: {

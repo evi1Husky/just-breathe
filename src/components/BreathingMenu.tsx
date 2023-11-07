@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState } from "react";
 import { IconButton } from "@mui/material";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import Menu from "@mui/material/Menu";
@@ -6,7 +6,7 @@ import MenuItem from "@mui/material/MenuItem";
 import Box from "@mui/material/Box";
 import Slider from "@mui/material/Slider";
 import Typography from "@mui/material/Typography";
-import { BreathingMenuProps, BreathingTechnique } from "../types";
+import { BreathingMenuProps } from "../types";
 
 export const BreathingMenu = ({
   isBreathing,
@@ -95,7 +95,7 @@ export const BreathingMenu = ({
           display="flex"
           flexDirection="column"
           alignItems="center"
-          width={200}
+          width={250}
         >
           <Box sx={{ marginTop: "1rem" }}>
             <Typography>breathe in {breathingTechnique.breatheIn}s</Typography>
@@ -106,7 +106,7 @@ export const BreathingMenu = ({
                   breatheIn: Number((e.target as HTMLInputElement).value),
                 });
               }}
-              sx={{ width: 150 }}
+              sx={{ width: 200 }}
               size="small"
               aria-label="Small steps"
               value={breathingTechnique.breatheIn}
@@ -124,7 +124,7 @@ export const BreathingMenu = ({
                   hold: Number((e.target as HTMLInputElement).value),
                 });
               }}
-              sx={{ width: 150 }}
+              sx={{ width: 200 }}
               size="small"
               aria-label="Small steps"
               value={breathingTechnique.hold}
@@ -144,7 +144,7 @@ export const BreathingMenu = ({
                   breatheOut: Number((e.target as HTMLInputElement).value),
                 });
               }}
-              sx={{ width: 150 }}
+              sx={{ width: 200 }}
               size="small"
               aria-label="Small steps"
               value={breathingTechnique.breatheOut}
@@ -162,7 +162,7 @@ export const BreathingMenu = ({
                   hold2: Number((e.target as HTMLInputElement).value),
                 });
               }}
-              sx={{ width: 150 }}
+              sx={{ width: 200 }}
               size="small"
               aria-label="Small steps"
               value={breathingTechnique.hold2}
@@ -179,7 +179,7 @@ export const BreathingMenu = ({
                   breaths: Number((e.target as HTMLInputElement).value),
                 });
               }}
-              sx={{ width: 150 }}
+              sx={{ width: 200 }}
               size="small"
               aria-label="Small steps"
               value={breathingTechnique.breaths}
